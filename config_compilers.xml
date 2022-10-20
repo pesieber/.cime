@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+========================================================================
+This file defines compiler flags for building CESM.  General flags are listed first
+followed by flags specific to particular operating systems, followed by particular machines.
+
+More general flags are replaced by more specific flags.
+
+Attributes indicate that an if clause should be added to the Macros so that these flags are added
+only under the conditions described by the attribute(s).
+
+The env_mach_specific file may set environment variables or load modules which set environment variables
+which are then  used in the Makefile.   For example the NETCDF_PATH on many machines is set by a module.
+
+========================================================================
+Serial/MPI compiler specification
+========================================================================
+
+SCC   and  SFC specifies the serial compiler
+MPICC and  MPICC specifies the mpi compiler
+
+if $MPILIB is set to mpi-serial then
+CC = $SCC
+FC = $SFC
+MPICC = $SCC
+MPIFC = $SFC
+INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
+
+-->
+    
+<config_compilers version="2.0">
+
+<!-- Default values for compilers and OS are in config_compilers.xml that comes with the source code. config_compilers.xml will be appended with the definitions made here. Specific settings for OS-machine-compiler combinations override more general ones. -->
+
+<!-- nvhpc config not included in clm5.0, config from CTSMdev not compatible with Ronny's code base -->
+<!-- needs to be adapted -->  
+
+<!-- Machine-specific settings -->    
+
+<!-- taken from Marie-Estelle where not redundant with generic settings -->     
+<!-- added -llapack -lblas -->     
+<compiler MACH="pizdaint">
+  <CPPDEFS>
+    <append MODEL="pop2"> -D_USE_FLOW_CONTROL </append>   
+  </CPPDEFS> 
+  <CFLAGS>
+    <append DEBUG="TRUE"> -O </append>
+  </CFLAGS>
+  <FFLAGS_NOOPT>
+    <base> -O0 </base>
+  </FFLAGS_NOOPT>
+  <CXX_LINKER> FORTRAN </CXX_LINKER>
+  <CXX_LDFLAGS>
+    <base> -cxxlib </base>
+  </CXX_LDFLAGS>
+  <MPI_LIB_NAME>mpich</MPI_LIB_NAME>
+  <MPI_PATH>$ENV{MPICH_DIR}</MPI_PATH>
+  <SLIBS>
+    <append> -llapack -lblas </append>
+  </SLIBS>
+</compiler>
+
+<!-- taken from Marie-Estelle where not redundant with generic settings--> 
+<compiler MACH="pizdaint" COMPILER="intel">
+  <CONFIG_ARGS>
+    <base> --host=Linux </base>
+  </CONFIG_ARGS>
+  <CFLAGS>
+    <append> -xCORE-AVX2 </append>
+  </CFLAGS>
+  <FFLAGS>
+    <append> -xCORE-AVX2 </append>
+  </FFLAGS>
+  <SLIBS>
+    <append> -L$(NETCDF_DIR) -lnetcdff -Wl,--as-needed,-L$(NETCDF_DIR)/lib -lnetcdff -lnetcdf </append>
+  </SLIBS>
+  <LDFLAGS>
+    <append> -mkl </append>
+  </LDFLAGS>
+  <!-- Bug in the intel/17.0.1 compiler requires this, remove this line when compiler is updated -->
+  <HAS_F2008_CONTIGUOUS>FALSE</HAS_F2008_CONTIGUOUS>
+</compiler>
+
+<!-- no specific settings needed?
+<compiler MACH="pizdaint" COMPILER="gnu">
+--> 
+    
+<!-- adds OASIS links, replace path with $USER spack installation -->
+<!-- make spack install with custom dirname (not 24obfvejulxnpfxiwatzmtcddx62pikc) so we can have a generic path, or set an environmental variable --> 
+<compiler MACH="pizdaint" COMPILER="gnu-oasis">
+  <CPPDEFS>
+    <append> -DCOUP_OAS </append>
+  </CPPDEFS>
+  <FFLAGS>
+    <append> -I/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/build/lib/mct -I/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/build/lib/psmile.MPI1 </append>      
+  </FFLAGS>
+  <SLIBS>
+    <append> -L/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
+  </SLIBS>
+</compiler>
+    
+</config_compilers>
