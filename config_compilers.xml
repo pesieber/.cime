@@ -90,13 +90,24 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
 <!-- make spack install with custom dirname (not 24obfvejulxnpfxiwatzmtcddx62pikc) so we can have a generic path, or set an environmental variable --> 
 <compiler MACH="pizdaint" COMPILER="gnu-oasis">
   <CPPDEFS>
-    <append> -DCOUP_OAS </append>
+    <append> -DCOUP_OAS -DHAVE_IEEE_ARITHMETIC</append>
   </CPPDEFS>
   <FFLAGS>
-    <append> -I/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/build/lib/mct -I/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/build/lib/psmile.MPI1 </append>      
+      <append> -I/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/master/gcc/4prft2e3u5hsqj6ylgt6yi7frilh3e6x/build/lib/mct -I/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/master/gcc/4prft2e3u5hsqj6ylgt6yi7frilh3e6x/build/lib/psmile.MPI1 -ffree-line-length-256 </append>      
   </FFLAGS>
   <SLIBS>
-    <append> -L/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
+    <append> -L/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/master/gcc/4prft2e3u5hsqj6ylgt6yi7frilh3e6x/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
+  </SLIBS>
+</compiler>
+<compiler MACH="pizdaint" COMPILER="nvhpc-oasis">
+  <CPPDEFS>
+    <append> -DCOUP_OAS -DHAVE_IEEE_ARITHMETIC</append>
+  </CPPDEFS>
+  <FFLAGS>
+      <append> -I/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/dev-build/nvhpc/zgbpdsa7gj3mwr7oemmr556lcppuj64k/build/lib/mct -I/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/dev-build/nvhpc/zgbpdsa7gj3mwr7oemmr556lcppuj64k/build/lib/psmile.MPI1 </append>      
+  </FFLAGS>
+  <SLIBS>
+      <append> -L/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/dev-build/nvhpc/zgbpdsa7gj3mwr7oemmr556lcppuj64k/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
   </SLIBS>
 </compiler>
     

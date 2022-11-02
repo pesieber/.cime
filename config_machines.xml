@@ -53,7 +53,7 @@
   <machine MACH="pizdaint">
     <DESC>CSCS Cray XC40/XC50, os is CLE based on SUSE SLES, 12 pes/node, batch system is SLURM</DESC>
     <OS>CNL</OS>
-    <COMPILERS>cray,gnu,intel,nvhpc</COMPILERS>
+    <COMPILERS>cray,gnu,intel,nvhpc,gnu-oasis,nvhpc-oasis</COMPILERS>
     <MPILIBS>mpich</MPILIBS>
     <CIME_OUTPUT_ROOT>/scratch/snx3000/$USER</CIME_OUTPUT_ROOT>
     <DIN_LOC_ROOT>$ENV{CESMDATAROOT}/cesm_inputdata</DIN_LOC_ROOT>
@@ -110,6 +110,12 @@
       <modules compiler="gnu-oasis">
         <command name="load">PrgEnv-gnu</command>
         <command name="switch">gcc gcc/9.3.0</command>
+        <command name="load">cray-netcdf-hdf5parallel</command>
+        <command name="load">cray-hdf5-parallel</command>
+	    <command name="load">cray-parallel-netcdf</command>
+      </modules>
+      <modules compiler="nvhpc-oasis">
+        <command name="load">PrgEnv-nvidia</command>
         <command name="load">cray-netcdf-hdf5parallel</command>
         <command name="load">cray-hdf5-parallel</command>
 	    <command name="load">cray-parallel-netcdf</command>
