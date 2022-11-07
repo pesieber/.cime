@@ -81,34 +81,5 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   <!-- Bug in the intel/17.0.1 compiler requires this, remove this line when compiler is updated -->
   <HAS_F2008_CONTIGUOUS>FALSE</HAS_F2008_CONTIGUOUS>
 </compiler>
-
-<!-- no specific settings needed?
-<compiler MACH="pizdaint" COMPILER="gnu">
---> 
-    
-<!-- adds OASIS links, replace path with $USER spack installation -->
-<!-- make spack install with custom dirname (not 24obfvejulxnpfxiwatzmtcddx62pikc) so we can have a generic path, or set an environmental variable --> 
-<compiler MACH="pizdaint" COMPILER="gnu-oasis">
-  <CPPDEFS>
-    <append> -DCOUP_OAS -DHAVE_IEEE_ARITHMETIC</append>
-  </CPPDEFS>
-  <FFLAGS>
-      <append> -I/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/master/gcc/4prft2e3u5hsqj6ylgt6yi7frilh3e6x/build/lib/mct -I/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/master/gcc/4prft2e3u5hsqj6ylgt6yi7frilh3e6x/build/lib/psmile.MPI1 -ffree-line-length-256 </append>      
-  </FFLAGS>
-  <SLIBS>
-    <append> -L/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/master/gcc/4prft2e3u5hsqj6ylgt6yi7frilh3e6x/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
-  </SLIBS>
-</compiler>
-<compiler MACH="pizdaint" COMPILER="nvhpc-oasis">
-  <CPPDEFS>
-    <append> -DCOUP_OAS -DHAVE_IEEE_ARITHMETIC</append>
-  </CPPDEFS>
-  <FFLAGS>
-      <append> -I/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/dev-build/nvhpc/zgbpdsa7gj3mwr7oemmr556lcppuj64k/build/lib/mct -I/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/dev-build/nvhpc/zgbpdsa7gj3mwr7oemmr556lcppuj64k/build/lib/psmile.MPI1 </append>      
-  </FFLAGS>
-  <SLIBS>
-      <append> -L/scratch/snx3000/juckerj/SPACK-INSTALL/oasis/dev-build/nvhpc/zgbpdsa7gj3mwr7oemmr556lcppuj64k/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
-  </SLIBS>
-</compiler>
     
 </config_compilers>
