@@ -82,12 +82,13 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   <HAS_F2008_CONTIGUOUS>FALSE</HAS_F2008_CONTIGUOUS>
 </compiler>
 
-<!-- no specific settings needed?
+<!-- no specific settings needed for gnu on pizdaint?
 <compiler MACH="pizdaint" COMPILER="gnu">
 -->
 
 <!-- adds OASIS links for gnu -->    
-<!-- this is a copy of the generic configuration for gnu -->
+<!-- this is a copy of the generic configuration for gnu, adding OASIS links with $USER spack installation -->
+<!-- $SPACK_PATH is found by compile_cclm2.sh --> 
 <compiler COMPILER="gnu-oasis">
   <CFLAGS>
     <base> -std=gnu99 </base>
@@ -98,6 +99,7 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   <CPPDEFS>
     <!-- http://gcc.gnu.org/onlinedocs/gfortran/ -->
     <append> -DFORTRANUNDERSCORE -DNO_R16 -DCPRGNU</append>
+    <append> -DCOUP_OAS </append>
   </CPPDEFS>
   <CXX_LINKER>FORTRAN</CXX_LINKER>
   <FC_AUTO_R8>
@@ -115,6 +117,7 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
 	 when called on a signaling NaN. -->
     <append DEBUG="TRUE"> -g -Wall -Og -fbacktrace -ffpe-trap=zero,overflow -fcheck=bounds </append>
     <append DEBUG="FALSE"> -O </append>
+    <append> -I$OASIS_PATH/build/lib/mct -I$OASIS_PATH/build/lib/psmile.MPI1 </append>      
   </FFLAGS>
   <FFLAGS_NOOPT>
     <base> -O0 </base>
@@ -129,27 +132,17 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   <LDFLAGS>
     <append compile_threaded="true"> -fopenmp </append>
   </LDFLAGS>
-  <MPICC> mpicc  </MPICC>
-  <MPICXX> mpicxx </MPICXX>
-  <MPIFC> mpif90 </MPIFC>
+  <MPICC> gcc  </MPICC>
+  <MPICXX> g++ </MPICXX>
+  <MPIFC> gfortran </MPIFC>
   <SCC> gcc </SCC>
   <SCXX> g++ </SCXX>
   <SFC> gfortran </SFC>
   <SUPPORTS_CXX>TRUE</SUPPORTS_CXX>
-</compiler>
-    
-<!-- replace path with $USER spack installation -->
-<!-- make spack install with custom dirname (not 24obfvejulxnpfxiwatzmtcddx62pikc) so we can have a generic path, or set an environmental variable --> 
-<compiler MACH="pizdaint" COMPILER="gnu-oasis">
-  <CPPDEFS>
-    <append> -DCOUP_OAS </append>
-  </CPPDEFS>
-  <FFLAGS>
-    <append> -I/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/build/lib/mct -I/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/build/lib/psmile.MPI1 </append>      
-  </FFLAGS>
   <SLIBS>
-    <append> -L/project/sm61/psieber/spack-install/oasis/master/gcc/24obfvejulxnpfxiwatzmtcddx62pikc/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
+      <append> -L$OASIS_PATH/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
   </SLIBS>
 </compiler>
+
     
 </config_compilers>
