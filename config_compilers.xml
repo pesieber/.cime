@@ -117,7 +117,7 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
 	 when called on a signaling NaN. -->
     <append DEBUG="TRUE"> -g -Wall -Og -fbacktrace -ffpe-trap=zero,overflow -fcheck=bounds </append>
     <append DEBUG="FALSE"> -O </append>
-    <append> -I$OASIS_PATH/build/lib/mct -I$OASIS_PATH/build/lib/psmile.MPI1 </append>      
+    <append> -I$ENV{OASIS_PATH}/build/lib/mct -I$ENV{OASIS_PATH}/build/lib/psmile.MPI1 </append>      
   </FFLAGS>
   <FFLAGS_NOOPT>
     <base> -O0 </base>
@@ -140,7 +140,7 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   <SFC> gfortran </SFC>
   <SUPPORTS_CXX>TRUE</SUPPORTS_CXX>
   <SLIBS>
-      <append> -L$OASIS_PATH/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
+      <append> -L$ENV{OASIS_PATH}/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
   </SLIBS>
 </compiler>
 
