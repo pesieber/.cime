@@ -117,10 +117,12 @@
 
       <modules compiler="nvhpc">
         <command name="load">PrgEnv-nvidia</command>
+        <command name="load">nvhpc/21.3</command>
       </modules>
 
       <modules compiler="nvhpc-oasis">
-        <command name="load">PrgEnv-nvidia</command>    
+        <command name="load">PrgEnv-nvidia</command>
+        <command name="load">nvhpc/21.3</command>
       </modules>
 
       <modules>

@@ -82,11 +82,8 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   <HAS_F2008_CONTIGUOUS>FALSE</HAS_F2008_CONTIGUOUS>
 </compiler>
 
-<!-- no specific settings needed for gnu on pizdaint?
-<compiler MACH="pizdaint" COMPILER="gnu">
--->
+<!-- no specific settings needed for gnu on pizdaint -->
 
-<!-- adds OASIS links for gnu -->    
 <!-- this is a copy of the generic configuration for gnu, adding OASIS links with $USER spack installation -->
 <!-- $SPACK_PATH is found by compile_cclm2.sh --> 
 <compiler COMPILER="gnu-oasis">
@@ -144,5 +141,104 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   </SLIBS>
 </compiler>
 
-    
+<!-- this is a copy of the generic configuration for nvhpc from CTSMdev --> 
+<!-- changed compile_threaded="TRUE" to compile_threaded="true" to comply with old format --> 
+<compiler COMPILER="nvhpc">
+  <CFLAGS>
+    <base> -gopt  -time </base>
+    <append compile_threaded="true"> -mp </append>
+  </CFLAGS>
+  <CPPDEFS>
+    <append> -DFORTRANUNDERSCORE -DNO_SHR_VMATH -DNO_R16  -DCPRPGI </append>
+  </CPPDEFS>
+  <CXX_LINKER>CXX</CXX_LINKER>
+  <FC_AUTO_R8>
+    <base> -r8 </base>
+  </FC_AUTO_R8>
+  <FFLAGS>
+    <base>  -i4 -gopt  -time -Mextend -byteswapio -Mflushz -Kieee  </base>
+    <append compile_threaded="true"> -mp </append>
+    <append DEBUG="TRUE"> -O0 -g -Ktrap=fp -Mbounds -Kieee </append>
+    <append MODEL="datm"> -Mnovect </append>
+    <append MODEL="dlnd"> -Mnovect </append>
+    <append MODEL="drof"> -Mnovect </append>
+    <append MODEL="dwav"> -Mnovect </append>
+    <append MODEL="dice"> -Mnovect </append>
+    <append MODEL="docn"> -Mnovect </append>
+    <append> -I$ENV{OASIS_PATH}/build/lib/mct -I$ENV{OASIS_PATH}/build/lib/psmile.MPI1 </append>
+  </FFLAGS>
+  <FFLAGS_NOOPT>
+    <base> -O0 </base>
+  </FFLAGS_NOOPT>
+  <FIXEDFLAGS>
+    <base> -Mfixed </base>
+  </FIXEDFLAGS>
+  <FREEFLAGS>
+    <base> -Mfree </base>
+  </FREEFLAGS>
+  <HAS_F2008_CONTIGUOUS>FALSE</HAS_F2008_CONTIGUOUS>
+  <LDFLAGS>
+    <base> -time -Wl,--allow-multiple-definition </base>
+    <append compile_threaded="true"> -mp </append>
+  </LDFLAGS>
+  <MPICC> mpicc </MPICC>
+  <MPICXX> mpicxx </MPICXX>
+  <MPIFC> mpif90 </MPIFC>
+  <SCC> nvc </SCC>
+  <SCXX> nvc++ </SCXX>
+  <SFC> nvfortran </SFC>
+</compiler>
+
+<!-- this is a copy of the generic configuration for nvhpc from CTSMdev --> 
+<!-- changed compile_threaded="TRUE" to compile_threaded="true" to comply with old format --> 
+<!-- added OASIS --> 
+<compiler COMPILER="nvhpc-oasis">
+  <CFLAGS>
+    <base> -gopt  -time </base>
+    <append compile_threaded="true"> -mp </append>
+  </CFLAGS>
+  <CPPDEFS>
+    <append> -DFORTRANUNDERSCORE -DNO_SHR_VMATH -DNO_R16  -DCPRPGI </append>
+    <append> -DCOUP_OAS </append>
+  </CPPDEFS>
+  <CXX_LINKER>CXX</CXX_LINKER>
+  <FC_AUTO_R8>
+    <base> -r8 </base>
+  </FC_AUTO_R8>
+  <FFLAGS>
+    <base>  -i4 -gopt  -time -Mextend -byteswapio -Mflushz -Kieee  </base>
+    <append compile_threaded="true"> -mp </append>
+    <append DEBUG="TRUE"> -O0 -g -Ktrap=fp -Mbounds -Kieee </append>
+    <append MODEL="datm"> -Mnovect </append>
+    <append MODEL="dlnd"> -Mnovect </append>
+    <append MODEL="drof"> -Mnovect </append>
+    <append MODEL="dwav"> -Mnovect </append>
+    <append MODEL="dice"> -Mnovect </append>
+    <append MODEL="docn"> -Mnovect </append>
+  </FFLAGS>
+  <FFLAGS_NOOPT>
+    <base> -O0 </base>
+  </FFLAGS_NOOPT>
+  <FIXEDFLAGS>
+    <base> -Mfixed </base>
+  </FIXEDFLAGS>
+  <FREEFLAGS>
+    <base> -Mfree </base>
+  </FREEFLAGS>
+  <HAS_F2008_CONTIGUOUS>FALSE</HAS_F2008_CONTIGUOUS>
+  <LDFLAGS>
+    <base> -time -Wl,--allow-multiple-definition </base>
+    <append compile_threaded="true"> -mp </append>
+  </LDFLAGS>
+  <MPICC> mpicc </MPICC>
+  <MPICXX> mpicxx </MPICXX>
+  <MPIFC> mpif90 </MPIFC>
+  <SCC> nvc </SCC>
+  <SCXX> nvc++ </SCXX>
+  <SFC> nvfortran </SFC>
+  <SLIBS>
+      <append> -L$ENV{OASIS_PATH}/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
+  </SLIBS>
+</compiler>    
+
 </config_compilers>
