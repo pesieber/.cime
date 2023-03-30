@@ -187,6 +187,9 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   <SCC> nvc </SCC>
   <SCXX> nvc++ </SCXX>
   <SFC> nvfortran </SFC>
+  <SLIBS>
+      <append> -L$ENV{OASIS_PATH}/lib -lpsmile.MPI1 -lscrip -lmct_oasis -lmpeu_oasis </append>
+  </SLIBS>
 </compiler>
 
 <!-- this is a copy of the generic configuration for nvhpc from CTSMdev --> 
