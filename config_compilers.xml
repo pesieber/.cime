@@ -96,7 +96,7 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   <CPPDEFS>
     <!-- http://gcc.gnu.org/onlinedocs/gfortran/ -->
     <append> -DFORTRANUNDERSCORE -DNO_R16 -DCPRGNU</append>
-    <append> -DCOUP_OAS </append>
+    <append> -DCOUP_OAS -DHAVE_IEEE_ARITHMETIC </append>
   </CPPDEFS>
   <CXX_LINKER>FORTRAN</CXX_LINKER>
   <FC_AUTO_R8>
@@ -165,7 +165,6 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
     <append MODEL="dwav"> -Mnovect </append>
     <append MODEL="dice"> -Mnovect </append>
     <append MODEL="docn"> -Mnovect </append>
-    <append> -I$ENV{OASIS_PATH}/build/lib/mct -I$ENV{OASIS_PATH}/build/lib/psmile.MPI1 </append>
   </FFLAGS>
   <FFLAGS_NOOPT>
     <base> -O0 </base>
@@ -199,7 +198,7 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
   </CFLAGS>
   <CPPDEFS>
     <append> -DFORTRANUNDERSCORE -DNO_SHR_VMATH -DNO_R16  -DCPRPGI </append>
-    <append> -DCOUP_OAS </append>
+    <append> -DCOUP_OAS -DHAVE_IEEE_ARITHMETIC </append>
   </CPPDEFS>
   <CXX_LINKER>CXX</CXX_LINKER>
   <FC_AUTO_R8>
@@ -215,7 +214,7 @@ INC_MPI = $(CIMEROOT)/src/externals/mct/mpi-serial
     <append MODEL="dwav"> -Mnovect </append>
     <append MODEL="dice"> -Mnovect </append>
     <append MODEL="docn"> -Mnovect </append>
-  </FFLAGS>
+    <append> -I$ENV{OASIS_PATH}/build/lib/mct -I$ENV{OASIS_PATH}/build/lib/psmile.MPI1 </append></FFLAGS>
   <FFLAGS_NOOPT>
     <base> -O0 </base>
   </FFLAGS_NOOPT>
