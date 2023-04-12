@@ -135,8 +135,8 @@
     <environment_variables>
       <env name="OMP_STACKSIZE">64M</env>
     </environment_variables>
-    <environment_variables comp_interface="nuopc" compiler="nvhpc">
-      <env name="ESMFMKFILE">/users/psieber/esmf/install/lib/libO/Unicos.nvhpc.64.mpi.default/esmf.mk</env>
+    <environment_variables comp_interface="nuopc">
+      <env name="ESMFMKFILE">$ENV{ESMF_PATH}/lib/esmf.mk</env>
     </environment_variables>
   </machine>
 
