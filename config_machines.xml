@@ -94,7 +94,8 @@
         <command name="rm">PrgEnv-pgi</command>
         <command name="rm">PrgEnv-nvidia</command>
         <command name="load">daint-gpu</command>
-        <command name="load">cray-mpich</command>
+	<command name="load">cray-mpich</command>
+	<command name="load">cray-python</command>
       </modules>
 
       <modules compiler="gnu">
